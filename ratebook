@@ -1,0 +1,48 @@
+---------- Rate Book ----------
+1) Add fields to Book class in models.py:
+
+	ratings = models.IntegerField(default=0)
+ratingscount = models.IntegerField(default=0)
+overallrating = models.IntegerField(default=0)
+
+2) Enter commands in terminal:
+
+	(base) C:\CS3337S2\bookEx>python manage.py check
+	(base) C:\CS3337S2\bookEx>python manage.py makemigrations
+	(base) C:\CS3337S2\bookEx>python manage.py migrate
+
+3) Add to urls.py:
+
+	path('book_detail/ratebook/<int:book_id>', views.ratebook, name='ratebook'),
+
+4) Add to views.py:
+
+	def ratebook(request, book_id):
+   if request.method == 'POST':
+       rate = request.POST.get('rate')
+       book = Book.objects.get(id=book_id)
+       book.ratings += int(rate)
+       book.ratingscount += 1
+       book.overallrating = book.ratings/book.ratingscount
+       book.save()
+       return HttpResponseRedirect('/displaybooks')
+
+5) Add to book_detail.html under <td>Image</td>:
+
+<td>Ratings: {{ book.overallrating }}/5</td>
+<td>Rate this book:
+   <form action="ratebook/{{ book.id }}" method="post">
+       {% csrf_token %}
+       <select name="rate">
+           <option value="1">1</option>
+           <option value="2">2</option>
+           <option value="3">3</option>
+           <option value="4">4</option>
+           <option value="5">5</option>
+       </select>
+       <button type="submit">Rate</button>
+   </form>
+</td>
+
+
+6) Create ratebook.html (Maybe)
