@@ -1,0 +1,78 @@
+--------- About Us ----------
+1) Add to urls.py:
+
+path('aboutus', views.aboutus, name='aboutus'),
+
+2) Add to views.py: 
+
+	def aboutus(request):
+   return render(request,
+                 'bookMng/aboutus.html',
+                 {
+                     'item_list': MainMenu.objects.all()
+                 })
+
+
+3) Create aboutus.html (WIP)
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block sidenav %}
+   {% for item in item_list %}
+       <li><a href="{{ item.link }}">{{ item.item }}</a></li>
+   {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+    <H1 style="text-align:center">About Us</H1>
+
+<div>
+    <h2>Group 3 Members:</h2>
+    <ul>
+        <li>Luis Chavez</li>
+        <li>Christopher Gonzales</li>
+        <li>Arturo Moreno-Fuentes</li>
+        <li>Jolen Reid</li>
+        <li>Fabricio Reyes</li>
+        <li>Marco Rodriguez</li>
+    </ul>
+</div>
+
+<div>
+    <H2><b>General Description</b></H2>
+    <p>This service aims to provide a website that allows users to easily and effectively manage various
+        user-created books.
+    </p>
+    <p>To use this service, users must be create an account or log in with an existing one.</p>
+
+    <p><b>The following features are accessible through this service:</b></p>
+
+    <table border="3px" cellpadding="10px">
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Functionality</th>
+            </tr>
+        </thead>
+        <tbody style="text-align: left">
+            <tr>
+                <th>Display Books</th>
+                <th>Users can view and search for books created by others. Users can also view each books' details and leave ratings/comments.</th>
+            </tr>
+            <tr>
+                <th>Post Book</th>
+                <th>Users can create and post a book for others to access.</th>
+            </tr>
+            <tr>
+                <th>My Books</th>
+                <th>Users can view their own published books and delete if desired.</th>
+            </tr>
+            <tr>
+                <th>Shopping Cart</th>
+                <th>Users can add books to their shopping cart to purchase.</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
