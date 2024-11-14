@@ -113,32 +113,6 @@ def searchbook(request):
 {% load static %}
 
 {% block sidenav %}
-   {% for item in item_list %}
-       <li><a href="{{ item.link }}">{{ item.item }}</a></li>
-   {% endfor %}
-{% endblock sidenav %}
-
-{% block content %}
-    <H1>{{ search }}</H1>
-<table border="2">
-    {% for book in books %}
-    <tr>
-        <td>
-            <a href="book_detail/{{ book.id }}">
-            {{ book.name }}
-            </a>
-        </td>
-        <td>{{ book.username }}</td>
-    </tr>
-    {% endfor %}
-</table>
-{% endblock content %}
-
-
-{% extends "base.html" %}
-{% load static %}
-
-{% block sidenav %}
   {% for item in item_list %}
       <li><a href="{{ item.link }}">{{ item.item }}</a></li>
   {% endfor %}
