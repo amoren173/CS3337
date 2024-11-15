@@ -9,11 +9,24 @@
 {% endblock sidenav %}
 {% block content %}
     <H1>Display Book</H1>
+<<<<<<< HEAD
 <form action="{% url 'searchbook' %}" method="post">
         {% csrf_token %}
         Search: <input type="text" name="search" placeholder="Book Title">
         <button type="submit">Submit</button>
 </form>
+=======
+<div class="container d-flex justify-content-center mt-5">
+<form class="d-flex" action="{% url 'searchbook' %}" method="post">
+
+        {% csrf_token %}
+        <label class="form-label my-0 fs-3" for="search">Search:&nbsp;</label>
+        <input id="search" class="form-control" type="text" name="search" placeholder="Book Title">
+        <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+</div>
+<br>
+>>>>>>> 9debe73 (Third Update)
 <table class="table col p-3 table-bordered border-dark table-hover" border="2">
     {% for book in books %}
         <tr>
