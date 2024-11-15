@@ -12,7 +12,7 @@
     <div class="container px-0 mx-0 ">
 
 
-        <form action="" enctype="multipart/form-data" method="post" novalidate>
+        <form action="" enctype="multipart/form-data" method="post" novalidate class="fs-4">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn btn-primary">Submit</button>
