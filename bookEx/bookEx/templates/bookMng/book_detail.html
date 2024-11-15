@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block sidenav %}
+    {% for item in item_list %}
+    <li class="nav-item py-2 ps-3"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ item.link }}">{{ item.item }}</a></li>
+    {% endfor %}
+
+{% endblock sidenav %}
+{% block content %}
+    <H1>Book Detail</H1>
+<table class="table table-hover table-bordered border-black" border="2">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Published Date</th>
+            <th scope="col">Book Cover</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="align-middle">
+            <td>{{ book.name }}</td>
+            <td>{{ book.price }}</td>
+            <td>{{ book.publishdate }}</td>
+            <td>
+                <img src="{% static book.pic_path %}" height="100">
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock content %}
