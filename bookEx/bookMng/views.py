@@ -66,17 +66,20 @@ def book_detail(request, book_id):
                       'book': book,
                   })
 def mybooks(request):
-    books = Book.objects.filter(username=request.user)
+    if request.user.is_authenticated:
+        books = Book.objects.filter(username=request.user)
 
-    for b in books:
-        b.pic_path = b.picture.url[14:]
+        for b in books:
+            b.pic_path = b.picture.url[14:]
 
-    return render(request,
-                  'bookMng/mybooks.html',
-                  {
-                      'item_list': MainMenu.objects.all(),
-                      'books': books,
-                  })
+        return render(request,
+                      'bookMng/mybooks.html',
+                      {
+                          'item_list': MainMenu.objects.all(),
+                          'books': books,
+                      })
+    else:
+        return HttpResponseRedirect('/login?next=/')
 def book_delete(request, book_id):
 
     book = Book.objects.get(id=book_id)

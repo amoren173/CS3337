@@ -3,7 +3,7 @@
 
 {% block sidenav %}
    {% for item in item_list %}
-       <li class="nav-item py-2 ps-3"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ item.link }}">{{ item.item }}</a></li>
+       <li class="nav-item py-2 ps-2 fs-5 text-center"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ item.link }}">{{ item.item }}</a></li>
    {% endfor %}
 {% endblock sidenav %}
 

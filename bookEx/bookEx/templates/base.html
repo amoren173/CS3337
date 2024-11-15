@@ -35,16 +35,16 @@
             <!-- Login/Logout Section Aligned to Bottom -->
             <div class="mt-auto d-flex align-items-center justify-content-center">
                 {% if user.is_authenticated %}
-                    <span class="text-white me-2">{{ user.username }}</span>
+                    <span class="text-white me-5">{{ user.username }}</span>
                     <form action="{% url 'logout' %}?next=/" method="post">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-dark">Logout</button>
+                        <button type="submit" class="btn btn-danger">Logout</button>
                     </form>
                 {% else %}
-                    <span class="text-white">Not Logged In</span>
+                    <span class="text-white me-5">Not Logged In</span>
                     <form action="{% url 'login' %}?next=/" method="post">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-dark ms-2">Login</button>
+                        <button type="submit" class="btn btn-primary ms-2">Login</button>
                     </form>
                 {% endif %}
             </div>
