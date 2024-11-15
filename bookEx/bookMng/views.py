@@ -17,6 +17,13 @@ def index(request):
                       'item_list': MainMenu.objects.all()
                   })
 
+def aboutus(request):
+    return render(request,
+                  'bookMng/aboutus.html',
+                  {
+                      'item_list': MainMenu.objects.all()
+                  })
+
 def postbook(request):
     submitted = False
     if request.method == 'POST':
@@ -55,6 +62,22 @@ def displaybooks(request):
                       'item_list': MainMenu.objects.all(),
                       'books': books,
                   })
+
+def searchbook(request):
+    if request.method == "POST" and request.POST.get('search') != '':
+        search = request.POST.get('search')
+        books = Book.objects.filter(name__contains=search)
+        return render(request,
+                  'bookMng/searchresult.html',
+                  {
+                      'item_list': MainMenu.objects.all(),
+                      'books': books,
+                      'search': 'Search results for \'' + search + '\''
+                  })
+    else:
+        return HttpResponseRedirect('/displaybooks')
+
+
 def book_detail(request, book_id):
     book = Book.objects.get(id=book_id)
     book.pic_path = book.picture.url[14:]
@@ -65,6 +88,8 @@ def book_detail(request, book_id):
                       'item_list': MainMenu.objects.all(),
                       'book': book,
                   })
+
+
 def mybooks(request):
     if request.user.is_authenticated:
         books = Book.objects.filter(username=request.user)
@@ -80,6 +105,8 @@ def mybooks(request):
                       })
     else:
         return HttpResponseRedirect('/login?next=/')
+
+
 def book_delete(request, book_id):
 
     book = Book.objects.get(id=book_id)

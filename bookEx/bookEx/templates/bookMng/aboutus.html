@@ -3,7 +3,7 @@
 
 {% block sidenav %}
    {% for item in item_list %}
-       <li><a href="{{ item.link }}">{{ item.item }}</a></li>
+       <li class="nav-item py-2 ps-2 fs-5 text-center"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ item.link }}">{{ item.item }}</a></li>
    {% endfor %}
 {% endblock sidenav %}
 
@@ -27,7 +27,7 @@
     <p>This service aims to provide a website that allows users to easily and effectively manage various
         user-created books.
     </p>
-    <p>To use this service, users must be create an account or log in with an existing one.</p>
+    <p>To use this service, users must create an account or log in with an existing one.</p>
 
     <p><b>The following features are accessible through this service:</b></p>
 
