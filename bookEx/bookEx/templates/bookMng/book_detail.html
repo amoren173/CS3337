@@ -26,6 +26,20 @@
             <td>
                 <img src="{% static book.pic_path %}" height="100">
             </td>
+            <td>Ratings: {{ book.overallrating }}/5</td>
+            <td>Rate this book:
+                <form action="ratebook/{{ book.id }}" method="post">
+                    {% csrf_token %}
+                    <select name="rate">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <button type="submit">Rate</button>
+                </form>
+            </td>
         </tr>
     </tbody>
 </table>
