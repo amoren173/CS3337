@@ -89,6 +89,18 @@ def book_detail(request, book_id):
                       'book': book,
                   })
 
+def ratebook(request, book_id):
+    if request.method == 'POST':
+        rate = request.POST.get('rate')
+        book = Book.objects.get(id=book_id)
+        book.ratings += int(rate)
+        book.ratingscount += 1
+        book.overallrating = book.ratings/book.ratingscount
+        book.save()
+        return HttpResponseRedirect('/displaybooks')
+    else:
+        return HttpResponseRedirect('/displaybooks')
+
 
 def mybooks(request):
     if request.user.is_authenticated:
