@@ -16,6 +16,9 @@ class Book(models.Model):
     picture = models.FileField(upload_to='bookEx/static/uploads')
     pic_path = models.CharField(max_length=300, editable=False, blank=True)
     username = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    ratings = models.IntegerField(default=0)
+    ratingscount = models.IntegerField(default=0)
+    overallrating = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.id)
