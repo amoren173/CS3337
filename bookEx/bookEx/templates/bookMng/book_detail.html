@@ -48,20 +48,20 @@
     </tbody>
 </table>
 
-<!--    <h2>Comments</h2>-->
-<!--    <ul>-->
-<!--        {% for comment in comments %}-->
-<!--            <li style="list-style-type: none; padding: 0;">-->
-<!--                <strong>{{ comment.user.username }}</strong>-->
-<!--                {{ comment.content|linebreaks }}-->
-<!--                <small>Posted on {{ comment.created_at }}</small>-->
-<!--            </li><br>-->
-<!--        {% empty %}-->
-<!--            <p>This comment section is empty. Why not be the first to comment!</p>-->
-<!--        {% endfor %}-->
-<!--    </ul>-->
+    <h2>Comments</h2>
+    <ul>
+        {% for comment in comments %}
+            <li style="list-style-type: none; padding: 0;">
+                <strong>{{ comment.user.username }}</strong>
+                {{ comment.content|linebreaks }}
+                <small>Posted on {{ comment.created_at }}</small>
+            </li><br>
+        {% empty %}
+            <p>This comment section is empty. Why not be the first to comment!</p>
+        {% endfor %}
+    </ul>
 
-<!--    <h3>Leave a Comment</h3>-->
-<!--        <a href="{% url 'comment_form' book.id %}"><button>Leave a Comment</button></a>-->
+    <h3>Leave a Comment</h3>
+        <a href="{% url 'comment_form' book.id %}"><button>Leave a Comment</button></a>
 
 {% endblock content %}
