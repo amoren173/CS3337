@@ -6,15 +6,12 @@ from .models import Book
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-#cart
-from django.shortcuts import get_object_or_404
-from django.shortcuts import redirect
+
 
 # Create your views here.
 
 from .models import MainMenu
-#cart
-from .models import CartItem
+
 
 def index(request):
     return render(request,
@@ -137,44 +134,6 @@ def book_delete(request, book_id):
                   })
 
 
-# Cart Views
-def add_to_cart(request, book_id):
-    book = Book.objects.get(id=book_id)
-    cart_item, created = CartItem.objects.get_or_create(book=book, user=request.user)
-    if not created:
-        cart_item.quantity += 1
-        cart_item.save()
-    return cart_view(request)
-
-def cart_view(request):
-    cart_items = CartItem.objects.filter(user=request.user)
-    total = sum(item.total_price() for item in cart_items)
-    return render(request, 'bookMng/cart.html', {'cart_items': cart_items, 'total': total})
-
-def remove_from_cart(request, cart_item_id):
-    CartItem.objects.filter(id=cart_item_id, user=request.user).delete()
-    return cart_view(request)
-
-def checkout(request):
-    # Render a checkout template or handle checkout logic here
-    return render(request, 'bookMng/checkout.html', {
-        'item_list': MainMenu.objects.all()
-    })
-
-
-def update_cart(request, cart_item_id):
-    if request.method == 'POST':
-        new_quantity = int(request.POST.get('quantity', 1))
-        cart_item = CartItem.objects.get(id=cart_item_id, user=request.user)
-
-        if new_quantity > 0:
-            cart_item.quantity = new_quantity
-            cart_item.save()
-        else:
-            # If quantity is set to 0 or less, remove the item from the cart
-            cart_item.delete()
-
-    return redirect('cart_view')
 
 class Register(CreateView):
     template_name = "registration/register.html"
