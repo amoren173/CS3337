@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="menu-bar">
+        <!-- Menu content here -->
+    </div>
+    <div class="main-content">
+        <h1>Your Shopping Cart</h1>
+
+        {% if cart_items %}
+            <table style="width: 85%; border: 3px solid #ddd; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>Book</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart_items %}
+        <tr>
+            <td>{{ item.book.name }}</td>
+            <td>
+                <form action="{% url 'update_cart' item.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" style="width: 20%; margin-left: 60px">
+                    <button type="submit" class="button">Update</button>
+                </form>
+            </td>
+            <td>${{ item.book.price }}</td>
+            <td>${{ item.total_price }}</td>
+            <td><a href="{% url 'remove_from_cart' item.id %}" class="button">Remove</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+            <p class="total">Total: ${{ total }}</p>
+            <a href="{% url 'displaybooks' %}" class="button">Continue Shopping</a>
+            <a href="{% url 'checkout' %}" class="button">Proceed to Checkout</a>
+        {% else %}
+            <p class="empty-cart">Your cart is empty.</p>
+            <a href="{% url 'displaybooks' %}" class="button">Browse Books</a>
+        {% endif %}
+    </div>
+</div>
+<div class="footer">
+    <p>&copy; 2024 Book Store</p>
+</div>

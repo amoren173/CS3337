@@ -22,3 +22,16 @@ class Book(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+# CartItem model for shopping cart functionality
+class CartItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def total_price(self):
+        return self.quantity * self.book.price  # Calculate total price based on quantity
+
+    def __str__(self):
+        return f"{self.book.name} (x{self.quantity})"
