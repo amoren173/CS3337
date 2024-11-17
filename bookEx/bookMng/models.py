@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 # Create your models here.
 class MainMenu(models.Model):
     item = models.CharField(max_length=200,unique=True)
@@ -24,3 +25,14 @@ class Book(models.Model):
         return str(self.id)
 
 
+# CartItem model for shopping cart functionality
+class CartItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def total_price(self):
+        return self.quantity * self.book.price  # Calculate total price based on quantity
+
+    def __str__(self):
+        return f"{self.book.name} (x{self.quantity})"

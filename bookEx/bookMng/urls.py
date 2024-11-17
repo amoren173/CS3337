@@ -13,5 +13,10 @@ urlpatterns = [
     path('aboutus', views.aboutus, name='aboutus'),
     path('searchbook', views.searchbook, name='searchbook'),
     path('book_detail/ratebook/<int:book_id>', views.ratebook, name='ratebook'),
-
+#Cart URLs
+    path('cart/', views.cart_view, name='cart_view'),
+    path('cart/add/<int:book_id>/', views.add_to_cart, name='add_to_cart'),
+    path('cart/remove/<int:cart_item_id>/', views.remove_from_cart, name='remove_from_cart'),
+    path('checkout/', views.checkout, name='checkout'),
+    path('cart/update/<int:cart_item_id>/', views.update_cart, name='update_cart'),
 ]
