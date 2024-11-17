@@ -149,7 +149,7 @@ def add_to_cart(request, book_id):
 def cart_view(request):
     cart_items = CartItem.objects.filter(user=request.user)
     total = sum(item.total_price() for item in cart_items)
-    return render(request, 'bookMng/cart.html', {'cart_items': cart_items, 'total': total})
+    return render(request, 'bookMng/cart.html', {'item_list': MainMenu.objects.all(),'cart_items': cart_items, 'total': total})
 
 def remove_from_cart(request, cart_item_id):
     CartItem.objects.filter(id=cart_item_id, user=request.user).delete()
