@@ -19,4 +19,9 @@ urlpatterns = [
     path('cart/remove/<int:cart_item_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('checkout/', views.checkout, name='checkout'),
     path('cart/update/<int:cart_item_id>/', views.update_cart, name='update_cart'),
+
+    #comment URLs
+    path('register/', views.Register.as_view(), name='register'),
+    path('book_detail/<int:book_id>/comment_form/', views.comment_form, name='comment_form'),
+
 ]

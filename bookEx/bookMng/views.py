@@ -16,6 +16,13 @@ from .models import MainMenu
 #cart
 from .models import CartItem
 
+#Comment
+from .models import Book, Comment
+from .forms import CommentForm
+from django.views import View
+from django.shortcuts import redirect, render
+
+
 def index(request):
     return render(request,
                   'bookMng/index.html',
@@ -86,6 +93,7 @@ def searchbook(request):
 
 def book_detail(request, book_id):
     book = Book.objects.get(id=book_id)
+    comments = book.comments.all()#this helps get all comments relate to book
     book.pic_path = book.picture.url[14:]
 
     return render(request,
@@ -93,6 +101,9 @@ def book_detail(request, book_id):
                   {
                       'item_list': MainMenu.objects.all(),
                       'book': book,
+                      'comments': comments,
+                      'comment_form': comment_form,
+
                   })
 
 def ratebook(request, book_id):
@@ -184,3 +195,24 @@ class Register(CreateView):
     def form_valid(self, form):
         form.save()
         return HttpResponseRedirect(self.success_url)
+
+def comment_form(request, book_id):
+    book = Book.objects.get(id=book_id)
+    comments = book.comments.all()
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.book = book
+            comment.user = request.user
+            comment.save()
+            return redirect('book_detail', book_id=book.id)
+    else:
+        comment_form = CommentForm()
+
+    return render(request, 'bookMng/post_comment.html', {
+        'book': book,
+        'comment_form': comment_form,
+    })
+
