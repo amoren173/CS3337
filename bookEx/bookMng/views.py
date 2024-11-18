@@ -197,22 +197,31 @@ class Register(CreateView):
         return HttpResponseRedirect(self.success_url)
 
 def comment_form(request, book_id):
-    book = Book.objects.get(id=book_id)
+    # Fetch the book or return a 404 if not found
+    book = get_object_or_404(Book, id=book_id)
+    # Get all comments related to the book
     comments = book.comments.all()
 
     if request.method == 'POST':
+        # Handle form submission
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
+            # Associate the comment with the book and the user
             comment = comment_form.save(commit=False)
             comment.book = book
             comment.user = request.user
             comment.save()
+            # Redirect to the book detail page after saving
             return redirect('book_detail', book_id=book.id)
     else:
+        # Render an empty form for GET requests
         comment_form = CommentForm()
 
+    # Render the template with the book and form context
     return render(request, 'bookMng/post_comment.html', {
+        'item_list': MainMenu.objects.all(),
         'book': book,
         'comment_form': comment_form,
+        'comments': comments,  # Optional: Pass the comments to display them in the template
     })
 

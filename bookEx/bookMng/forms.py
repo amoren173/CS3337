@@ -27,6 +27,12 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={
+                'class': 'form-control',  # Apply Bootstrap's form-control class
+                'rows': 5,  # Optional: Set height
+                'placeholder': 'Write your comment here...',  # Optional: Placeholder text
+            }),
 
-
+        }
 

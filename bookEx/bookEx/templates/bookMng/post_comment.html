@@ -3,7 +3,7 @@
 
 {% block sidenav %}
     {% for item in item_list %}
-        <li><a href="{{item.link}}">{{item.item}}</a></li>
+            <li class="nav-item py-2 ps-2 fs-5 "><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ item.link }}">{{ item.item }}</a></li>
     {% endfor %}
 {% endblock sidenav %}
 
@@ -13,13 +13,11 @@
     {% if request.user.is_authenticated %}
         <form method="post">
             {% csrf_token %}
-<!--             <label for="description">Add Headline:</label><br>-->
-<!--             <input type="text" id="description" name="description"><br><br>-->
+            <div class="mb-3">
 
-            <label>Your Comment:</label><br>
-            {{ comment_form.content }}<br><br>
-
-            <button type="submit">Post Comment</button>
+                {{ comment_form.content }}
+            </div>
+            <button type="submit" class="btn btn-primary">Post Comment</button>
         </form>
     {% else %}
         <p>You must log in to leave a comment.</p>

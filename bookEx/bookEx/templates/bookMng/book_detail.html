@@ -60,8 +60,6 @@
             <p>This comment section is empty. Why not be the first to comment!</p>
         {% endfor %}
     </ul>
-
-    <h3>Leave a Comment</h3>
-        <a href="{% url 'comment_form' book.id %}"><button>Leave a Comment</button></a>
+    <a class="btn btn-primary" href="{% url 'comment_form' book.id %}">Leave a Comment</a>
 
 {% endblock content %}
