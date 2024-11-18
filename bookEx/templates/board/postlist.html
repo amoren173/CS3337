@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            My page title
+        {% endblock title%}
+    </title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+
+<div class="banner">
+        <img src="{% static 'banner.jpg' %}" alt="Banner Image" width="700" height="120">
+    </div>
+
+
+
+
+
+
+<head>
+    <title>Message Board</title>
+</head>
+<body>
+    <h1>Message Board</h1>
+    <a href="{% url 'postcreate' %}">Create New Post</a>
+
+    <ul>
+        {% for post in posts %}
+            <li>
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.content|truncatewords:20 }}</p>
+                <small>{{ post.created_at }}</small>
+            </li>
+        {% empty %}
+            <li>No posts available.</li> <!-- Displayed when posts queryset is empty -->
+        {% endfor %}
+
+    </ul>
+    <a href="{% url 'postbook' %}">Back to home</a>
+
+</body>
+
+
+
+
+
+
+
+ <div class="footer">
+        <p>&copy; CS3337 FAll 2024</p>
+    </div>
