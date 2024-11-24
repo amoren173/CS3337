@@ -10,4 +10,11 @@ urlpatterns = [
     path('mybooks', views.mybooks, name='mybooks'),
     path('book_detail/<int:book_id>', views.book_detail, name='book_detail'),
     path('book_delete/<int:book_id>', views.book_delete, name='book_delete'),
+
+    # messageboard URLS
+    path('home', views.index, name='index'),
+    path('postlist', views.postlist, name='postlist'),
+    path('postdetail', views.postdetail, name='postdetail'),
+    path('postcreate', views.postcreate, name='postcreate'),
+
 ]

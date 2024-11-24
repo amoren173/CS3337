@@ -1,6 +1,8 @@
 from django import forms
 from django.forms import ModelForm
 from .models import Book
+from .models import messageboard
+
 
 
 class BookForm(ModelForm):
@@ -12,4 +14,10 @@ class BookForm(ModelForm):
             'price',
             'picture',
         ]
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'content']
+
 
