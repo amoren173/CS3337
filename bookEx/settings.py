@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "bookMng.apps.BookmngConfig",
-    "board.apps.BoardConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
