@@ -15,9 +15,6 @@ from django.shortcuts import redirect
 from .models import MainMenu
 #cart
 from .models import CartItem
-#Checkout
-from .forms import CheckoutForm
-from django.contrib import messages
 
 #Comment
 from .models import Book, Comment
@@ -192,39 +189,6 @@ def update_cart(request, cart_item_id):
             cart_item.delete()
 
     return redirect('cart_view')
-
-#checkout
-def checkout(request):
-    cart_items = CartItem.objects.filter(user=request.user)
-    total_price = sum(item.total_price() for item in cart_items)
-
-    if request.method == "POST":
-        form = CheckoutForm(request.POST)
-        if form.is_valid():
-            # Process the checkout form
-            full_name = form.cleaned_data['full_name']
-            address = form.cleaned_data['address']
-            contact_number = form.cleaned_data['contact_number']
-            payment_method = form.cleaned_data['payment_method']
-
-            # Placeholder: Save data or integrate with payment gateway
-            print(f"Order Details:\nName: {full_name}\nAddress: {address}\nContact: {contact_number}\nPayment: {payment_method}")
-
-            # Clear the cart after successful checkout
-            CartItem.objects.filter(user=request.user).delete()
-            messages.success(request, "Order placed successfully!")
-            return redirect('order_success')
-    else:
-        form = CheckoutForm()
-
-    return render(request, 'bookMng/checkout.html', {
-        'cart_items': cart_items,
-        'total_price': total_price,
-        'form': form,
-    })
-
-def order_success(request):
-    return render(request, 'bookMng/order_success.html')
 
 class Register(CreateView):
     template_name = "registration/register.html"

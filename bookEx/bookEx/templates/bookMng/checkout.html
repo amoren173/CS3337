@@ -1,49 +1,12 @@
-{% extends "base.html" %}
-
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+</head>
+<body>
     <h1>Checkout</h1>
-
-    <form method="POST">
-        {% csrf_token %}
-        
-        <fieldset>
-            <legend>Billing Information</legend>
-            {{ form.full_name.label_tag }}<br>
-            {{ form.full_name }}<br><br>
-
-            {{ form.address.label_tag }}<br>
-            {{ form.address }}<br><br>
-
-            {{ form.contact_number.label_tag }}<br>
-            {{ form.contact_number }}<br><br>
-        </fieldset>
-
-        <fieldset>
-            <legend>Payment Options</legend>
-            {{ form.payment_method }}
-        </fieldset>
-
-        <fieldset>
-            <legend>Order Summary</legend>
-            <table>
-                <tr>
-                    <th>Book</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                </tr>
-                {% for item in cart_items %}
-                <tr>
-                    <td>{{ item.book.name }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>${{ item.book.price }}</td>
-                    <td>${{ item.total_price }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            <p class="total"><strong>Total:</strong> ${{ total_price }}</p>
-        </fieldset>
-
-        <button type="submit" class="button">Place Order</button>
-    </form>
-{% endblock content %}
+    <p>This is the checkout page. Add your checkout logic here.</p>
+    <a href="{% url 'cart_view' %}" class="button">Back to Cart</a>
+</body>
+</html>
