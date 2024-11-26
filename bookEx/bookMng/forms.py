@@ -36,3 +36,19 @@ class CommentForm(forms.ModelForm):
 
         }
 
+#Checkout
+class CheckoutForm(forms.Form):
+    full_name = forms.CharField(max_length=100, label="Full Name", widget=forms.TextInput(attrs={'placeholder': 'Full Name'}))
+    address = forms.CharField(max_length=255, label="Address", widget=forms.Textarea(attrs={'placeholder': 'Street, City, State, ZIP', 'rows': 3}))
+    contact_number = forms.CharField(max_length=15, label="Contact Number", widget=forms.TextInput(attrs={'placeholder': 'Phone Number'}))
+    payment_method = forms.ChoiceField(
+        choices=[
+            ('credit_card', 'Credit Card'),
+            ('paypal', 'PayPal'),
+            ('cash', 'Cash on Delivery'),
+        ],
+        widget=forms.RadioSelect,
+        label="Payment Method",
+    )
+
+

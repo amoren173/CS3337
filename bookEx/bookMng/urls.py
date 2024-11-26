@@ -24,4 +24,8 @@ urlpatterns = [
     # path('register/', views.Register.as_view(), name='register'),
     path('book_detail/<int:book_id>/comment_form/', views.comment_form, name='comment_form'),
 
+#Checkout
+    path('checkout/', views.checkout, name='checkout'),
+    path('order_success/', views.order_success, name='order_success'),
+
 ]
