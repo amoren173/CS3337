@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block sidenav %}
+    {% for item in item_list %}
+    <li class="nav-item py-2 ps-2 fs-5 "><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ item.link }}">{{ item.item }}</a></li>
+    {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+    <H1>Post a Book Page</H1>
+    <div class="container px-0 mx-0 ">
+
+
+        <form action="" enctype="multipart/form-data" method="post" novalidate class="fs-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+    <br>
+    {% if submitted %}
+            <div class="alert alert-success">Your book has been submitted successfully!</div>
+    {% endif %}
+{% endblock content %}

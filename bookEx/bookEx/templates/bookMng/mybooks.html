@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block sidenav %}
+   {% for item in item_list %}
+       <li class="nav-item py-2 ps-2 fs-5"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ item.link }}">{{ item.item }}</a></li>
+   {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+    <H1>My Books</H1>
+<table class="table table-hover table-striped-columns table-bordered border-dark" border="2">
+   {% for book in books %}
+    <tr>
+        <td class="text-center">
+            <a class="fs-5" href="book_detail/{{ book.id }}">
+              {{ book.name }}
+            </a>
+        </td>
+        <td class="fs-5 text-center">{{ book.username }}</td>
+        <td class="text-center">
+
+            <a class="btn btn-danger fs-5" href="book_delete/{{ book.id }}">
+              DELETE
+            </a>
+
+        </td>
+    </tr>
+
+   {% endfor %}
+</table>
+{% endblock content %}

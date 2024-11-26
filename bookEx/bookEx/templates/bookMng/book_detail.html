@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block sidenav %}
+    {% for item in item_list %}
+        <li class="nav-item py-2 ps-2 fs-5"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ item.link }}">{{ item.item }}</a></li>
+    {% endfor %}
+
+{% endblock sidenav %}
+{% block content %}
+    <H1>Book Detail</H1>
+<table class="table table-hover table-bordered border-black" border="2">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Published Date</th>
+            <th scope="col">Book Cover</th>
+            <th scope="col">Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="align-middle">
+            <td>{{ book.name }}</td>
+            <td>{{ book.price }}</td>
+            <td>{{ book.publishdate }}</td>
+            <td>
+                <img src="{% static book.pic_path %}" height="100">
+            </td>
+            <td>Ratings: {{ book.overallrating }}/5</td>
+            <td>Rate this book:
+                <form action="ratebook/{{ book.id }}" method="post">
+                    {% csrf_token %}
+                    <div class="container w-50 p-0 m-0">
+                    <select class="form-select " name="rate">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                        <button class="btn btn-primary m-2" type="submit">Rate</button>
+                    </div>
+
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+    <h2>Comments</h2>
+    <ul>
+        {% for comment in comments %}
+            <li style="list-style-type: none; padding: 0;">
+                <strong>{{ comment.user.username }}</strong>
+                {{ comment.content|linebreaks }}
+                <small>Posted on {{ comment.created_at }}</small>
+            </li><br>
+        {% empty %}
+            <p>This comment section is empty. Why not be the first to comment!</p>
+        {% endfor %}
+    </ul>
+    <a class="btn btn-primary" href="{% url 'comment_form' book.id %}">Leave a Comment</a>
+
+{% endblock content %}
