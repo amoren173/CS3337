@@ -2,10 +2,6 @@ from django import forms
 from django.forms import ModelForm
 from .models import Book
 
-from django import forms
-from .models import Comment
-
-
 class BookForm(ModelForm):
     class Meta:
         model = Book
@@ -22,17 +18,17 @@ class BookForm(ModelForm):
             'picture': forms.FileInput(attrs={'class': 'form-control'}),
         }
 
-# Comments
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = ['content']
-        widgets = {
-            'content': forms.Textarea(attrs={
-                'class': 'form-control',  # Apply Bootstrap's form-control class
-                'rows': 5,  # Optional: Set height
-                'placeholder': 'Write your comment here...',  # Optional: Placeholder text
-            }),
-
-        }
-
+#new
+class CheckoutForm(forms.Form):
+    full_name = forms.CharField(max_length=100, label="Full Name", widget=forms.TextInput(attrs={'placeholder': 'Full Name'}))
+    address = forms.CharField(max_length=255, label="Address", widget=forms.Textarea(attrs={'placeholder': 'Street, City, State, ZIP', 'rows': 3}))
+    contact_number = forms.CharField(max_length=15, label="Contact Number", widget=forms.TextInput(attrs={'placeholder': 'Phone Number'}))
+    payment_method = forms.ChoiceField(
+        choices=[
+            ('credit_card', 'Credit Card'),
+            ('paypal', 'PayPal'),
+            ('cash', 'Cash on Delivery'),
+        ],
+        widget=forms.RadioSelect,
+        label="Payment Method",
+    )
