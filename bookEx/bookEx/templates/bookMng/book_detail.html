@@ -3,36 +3,53 @@
 
 {% block sidenav %}
     {% for item in item_list %}
-        <li class="nav-item py-2 ps-2 fs-5"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ item.link }}">{{ item.item }}</a></li>
+        <li class="nav-item py-2 ps-2 fs-5 text-center"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ item.link }}">{{ item.item }}</a></li>
     {% endfor %}
 
 {% endblock sidenav %}
 {% block content %}
     <H1>Book Detail</H1>
-<table class="table table-hover table-bordered border-black" border="2">
-    <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Published Date</th>
-            <th scope="col">Book Cover</th>
-            <th scope="col">Rating</th>
-        </tr>
-    </thead>
+
+
+    <div class="row">
+        <div class="col-2">
+            <img src="{% static book.pic_path %}" height="400" width="325">
+        </div>
+        <div class="col-3 fs-2 fw-medium text-center">
+
+            <table class="table table-sm table-hover table-bordered border-black" border="3" >
     <tbody>
         <tr class="align-middle">
+            <th scope="row">Name</th>
             <td>{{ book.name }}</td>
+
+
+        </tr>
+        <tr>
+            <th scope="row">Price</th>
             <td>{{ book.price }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Published Date</th>
             <td>{{ book.publishdate }}</td>
-            <td>
-                <img src="{% static book.pic_path %}" height="100">
-            </td>
+        </tr>
+        <tr>
+            <th scope="row">Rating</th>
             <td>Ratings: {{ book.overallrating }}/5</td>
-            <td>Rate this book:
+        </tr>
+
+    </tbody>
+</table>
+
+        </div>
+        <div class="row"><br></div>
+    </div>
+    <div class="row">
+        <p class="fw-bolder">Rate this book:</p>
                 <form action="ratebook/{{ book.id }}" method="post">
                     {% csrf_token %}
-                    <div class="container w-50 p-0 m-0">
-                    <select class="form-select " name="rate">
+                    <div class="container w-25 p-0 m-0">
+                    <select class="form-select w-50" name="rate">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -43,11 +60,8 @@
                     </div>
 
                 </form>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
+    </div>
+    <div class="row"><br></div>
     <h2>Comments</h2>
     <ul>
         {% for comment in comments %}

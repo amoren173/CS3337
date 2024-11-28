@@ -3,8 +3,10 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    height: 100%;
 }
 html{
+    height: 100%;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -44,3 +46,24 @@ html{
     padding: 10px 0;
 }
 
+.container-fluid{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.row {
+    flex-grow: 1; /* Allow the row to grow and fill the remaining height */
+    display: flex;
+    overflow: hidden; /* Prevent content overflow */
+}
+
+#sidebar-nav {
+    height: 100%; /* Ensure the sidebar fills its container */
+    overflow-y: auto; /* Allow vertical scrolling if content overflows */
+    width: 200px; /* Fixed width for the sidebar */
+}
+
+main {
+    flex-grow: 1; /* Allow the main content to take up remaining space */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
