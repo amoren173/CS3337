@@ -9,6 +9,11 @@
 
 {% block content %}
     <H1>My Books</H1>
+
+{% if empty %}
+    <br>
+    <h2>No books to display</h2>
+{% endif %}
 <table class="table table-hover table-striped-columns table-bordered border-dark" border="2">
    {% for book in books %}
     <tr>
