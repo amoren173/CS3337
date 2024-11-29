@@ -129,15 +129,25 @@ def mybooks(request):
     if request.user.is_authenticated:
         books = Book.objects.filter(username=request.user)
 
-        for b in books:
-            b.pic_path = b.picture.url[14:]
+        if len(books) == 0:
+            return render(request,
+                          'bookMng/mybooks.html',
+                          {
+                              'item_list': MainMenu.objects.all(),
+                              'books': books,
+                              'empty': True,
+                          })
+        else:
+            for b in books:
+                b.pic_path = b.picture.url[14:]
 
-        return render(request,
-                      'bookMng/mybooks.html',
-                      {
-                          'item_list': MainMenu.objects.all(),
-                          'books': books,
-                      })
+            return render(request,
+                          'bookMng/mybooks.html',
+                          {
+                              'item_list': MainMenu.objects.all(),
+                              'books': books,
+                              'empty': False,
+                          })
     else:
         return HttpResponseRedirect('/login?next=/')
 
