@@ -8,7 +8,7 @@
 
 {% endblock sidenav %}
 {% block content %}
-    <H1>Book Detail</H1>
+    <H1><strong>Book Detail</strong></H1>
 
 <div class="d-flex flex-column">
     <div class="container m-0">
@@ -16,11 +16,11 @@
         <div class="col p-0">
             <img src="{% static book.pic_path %}" height="400" width="325">
         </div>
-        <div class="col fs-2 fw-medium text-center pt-3 ps-0">
-
-        <table class="table table-secondary table-striped table-sm table-hover table-bordered border-black " border="3" >
+        <div class="col fs-2 fw-medium pt-3 ps-0">
+            <h2><strong>General Info</strong></h2>
+        <table class="table table-secondary table-striped table-md table-hover " >
             <tbody>
-                <tr class="align-middle">
+                <tr>
                     <th scope="row">Name</th>
                     <td>{{ book.name }}</td>
 
@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <th scope="row">Rating</th>
-                    <td>Ratings: {{ book.overallrating }}/5</td>
+                    <td>{{ book.overallrating }}/5</td>
                 </tr>
 
             </tbody>
@@ -47,11 +47,11 @@
         <div class="row"><br></div>
     </div>
     <div class="row">
-        <p class="fw-bolder">Rate this book:</p>
+        <p class="fw-bolder mt-2">Rate this book:</p>
                 <form action="ratebook/{{ book.id }}" method="post">
                     {% csrf_token %}
                     <div class="container w-25 p-0 m-0">
-                    <select class="form-select w-50" name="rate">
+                    <select class="form-select w-25" name="rate">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
