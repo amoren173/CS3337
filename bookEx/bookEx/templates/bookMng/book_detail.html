@@ -8,76 +8,80 @@
 
 {% endblock sidenav %}
 {% block content %}
-    <H1><strong>Book Detail</strong></H1>
+    <H1 style="text-align:center"><strong>Book Detail</strong></H1>
 
-<div class="d-flex flex-column">
-    <div class="container m-0">
-     <div class="row justify-content-start">
-        <div class="col p-0">
-            <img src="{% static book.pic_path %}" height="400" width="325">
+<div class="d-flex flex-column justify-content-center align-items-center mt-3 " >
+    <!-- Container for book details -->
+    <div class="container d-flex flex-column justify-content-center">
+    <!-- Row for book details -->
+    <div class="row justify-content-center align-items-center text-center">
+        <!-- Book Image -->
+        <div class="col-auto">
+            <img src="{% static book.pic_path %}" height="400" width="325" alt="Book Image">
         </div>
-        <div class="col fs-2 fw-medium pt-3 ps-0">
+        <!-- General Info Section -->
+        <div class="col-auto fs-2 fw-medium">
             <h2><strong>General Info</strong></h2>
-        <table class="table table-secondary table-striped table-md table-hover " >
-            <tbody>
-                <tr>
-                    <th scope="row">Name</th>
-                    <td>{{ book.name }}</td>
-
-
-                </tr>
-                <tr>
-                    <th scope="row">Price</th>
-                    <td>{{ book.price }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Published Date</th>
-                    <td>{{ book.publishdate }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Rating</th>
-                    <td>{{ book.overallrating }}/5</td>
-                </tr>
-
-            </tbody>
-        </table>
-
+            <table class="table table-secondary table-striped table-hover">
+                <tbody>
+                    <tr>
+                        <th scope="row">Name</th>
+                        <td>{{ book.name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Price</th>
+                        <td>{{ book.price }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Published Date</th>
+                        <td>{{ book.publishdate }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Rating</th>
+                        <td>{{ book.overallrating }}/5</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-auto">
+        <p class="fw-bolder">Rate this book:</p>
+        <form action="ratebook/{{ book.id }}" method="post" class="d-inline-block">
+            {% csrf_token %}
+            <div class="d-flex justify-content-center align-items-center">
+                <select class="form-select w-auto me-2" name="rate">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <button class="btn btn-primary" type="submit">Rate</button>
+            </div>
+        </form>
         </div>
     </div>
-        <div class="row"><br></div>
-    </div>
-    <div class="row">
-        <p class="fw-bolder mt-2">Rate this book:</p>
-                <form action="ratebook/{{ book.id }}" method="post">
-                    {% csrf_token %}
-                    <div class="container w-25 p-0 m-0">
-                    <select class="form-select w-25" name="rate">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                        <button class="btn btn-primary m-2" type="submit">Rate</button>
-                    </div>
 
-                </form>
-    </div>
-    <div class="row"><br></div>
-    <h2>Comments</h2>
-    <ul>
-        {% for comment in comments %}
-            <li style="list-style-type: none; padding: 0;">
-                <strong>{{ comment.user.username }}</strong>
-                {{ comment.content|linebreaks }}
-                <small>Posted on {{ comment.created_at }}</small>
-            </li><br>
-        {% empty %}
-            <p>This comment section is empty. Why not be the first to comment!</p>
-        {% endfor %}
-    </ul>
-    <div class="flex-shrink-1">
-    <a class="btn btn-primary p-2 btn-sm m-2" href="{% url 'comment_form' book.id %}">Leave a Comment</a>
+    <!-- Row for rating -->
+    <div class="row justify-content-center align-items-center text-center mb-4">
+
+        <div class="col-auto mt-4">
+        <h2><strong>Comments</strong></h2>
+        <ul class="list-unstyled">
+            {% for comment in comments %}
+                <li class="m-0 p-0">
+                    <strong>{{ comment.user.username }}:</strong> {{ comment.content|linebreaks }}
+
+                    <small>Posted on {{ comment.created_at }}</small>
+                </li>
+            {% empty %}
+                <p>This comment section is empty. Why not be the first to comment!</p>
+            {% endfor %}
+        </ul>
+        <a class="btn btn-primary btn-sm" href="{% url 'comment_form' book.id %}">Leave a Comment</a>
+        </div>
     </div>
 </div>
+
+</div>
+
 {% endblock content %}

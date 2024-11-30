@@ -8,16 +8,16 @@
 {% endblock sidenav %}
 
 {% block content %}
-<H1><strong>Post a Book Page</strong></H1>
-    <div class="container px-0 mx-0 ">
-
-
-        <form action="" enctype="multipart/form-data" method="post" novalidate class="fs-4">
+<H1 style="text-align:center"><strong>Post a Book Page</strong></H1>
+    <div class="d-flex flex-column align-items-center">
+    <div class="container justify-content-center align-items-center px-0 mx-0 ">
+        <form action="" enctype="multipart/form-data" method="post" novalidate class="fs-4 justify-content-center">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
+    </div>
     </div>
     <br>
     {% if submitted %}

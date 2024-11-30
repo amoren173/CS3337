@@ -9,7 +9,7 @@
 
 {% block content %}
 
-    <h1>"{{ book.name }}" Comment:</h1>
+    <h1 style="text-align:center">"{{ book.name }}" Comment:</h1>
     {% if request.user.is_authenticated %}
         <form method="post">
             {% csrf_token %}
