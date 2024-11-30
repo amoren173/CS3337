@@ -67,3 +67,14 @@ main {
     flex-grow: 1; /* Allow the main content to take up remaining space */
     overflow-y: auto; /* Enable vertical scrolling */
 }
+
+#sidebar-nav {
+            width: 200px; /* Default width */
+}
+
+        /* Increase sidebar width on mobile */
+@media (max-width: 768px) {
+    #sidebar-nav {
+        width: 250px; /* Increase width on mobile */
+    }
+}

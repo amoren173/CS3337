@@ -10,38 +10,40 @@
 {% block content %}
     <H1>Book Detail</H1>
 
-
-    <div class="row">
-        <div class="col-2">
+<div class="d-flex flex-column">
+    <div class="container m-0">
+    <div class="row justify-content-start">
+        <div class="col p-0">
             <img src="{% static book.pic_path %}" height="400" width="325">
         </div>
-        <div class="col-3 fs-2 fw-medium text-center">
+        <div class="col fs-2 fw-medium text-center pt-3 ps-0">
 
-            <table class="table table-sm table-hover table-bordered border-black" border="3" >
-    <tbody>
-        <tr class="align-middle">
-            <th scope="row">Name</th>
-            <td>{{ book.name }}</td>
+        <table class="table table-secondary table-striped table-sm table-hover table-bordered border-black " border="3" >
+            <tbody>
+                <tr class="align-middle">
+                    <th scope="row">Name</th>
+                    <td>{{ book.name }}</td>
 
 
-        </tr>
-        <tr>
-            <th scope="row">Price</th>
-            <td>{{ book.price }}</td>
-        </tr>
-        <tr>
-            <th scope="row">Published Date</th>
-            <td>{{ book.publishdate }}</td>
-        </tr>
-        <tr>
-            <th scope="row">Rating</th>
-            <td>Ratings: {{ book.overallrating }}/5</td>
-        </tr>
+                </tr>
+                <tr>
+                    <th scope="row">Price</th>
+                    <td>{{ book.price }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Published Date</th>
+                    <td>{{ book.publishdate }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Rating</th>
+                    <td>Ratings: {{ book.overallrating }}/5</td>
+                </tr>
 
-    </tbody>
-</table>
+            </tbody>
+        </table>
 
         </div>
+    </div>
         <div class="row"><br></div>
     </div>
     <div class="row">
@@ -74,6 +76,8 @@
             <p>This comment section is empty. Why not be the first to comment!</p>
         {% endfor %}
     </ul>
-    <a class="btn btn-primary" href="{% url 'comment_form' book.id %}">Leave a Comment</a>
-
+    <div class="flex-shrink-1">
+    <a class="btn btn-primary p-2 btn-sm m-2" href="{% url 'comment_form' book.id %}">Leave a Comment</a>
+    </div>
+</div>
 {% endblock content %}
