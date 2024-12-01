@@ -28,5 +28,12 @@
     </tr>
 
    {% endfor %}
+
+    {% if empty %}
+    <div class="text-center">
+        <h2 class="mt-4 text-muted">You currently have no published books</h2>
+        <h3 class="mt-3"><a href="{% url 'postbook' %}">Click here to post a book</a></h3>
+    </div>
+    {% endif %}
 </table>
 {% endblock content %}
