@@ -8,5 +8,60 @@
 {% endblock sidenav %}
 
 {% block content %}
-    <H1>Book Deleted!</H1>
+    <H1 class="mb-5">The following book was deleted from your library:</H1>
+    <div class="d-flex flex-column justify-content-center align-items-center mt-3 " >
+    <!-- Container for book details -->
+    <div class="container d-flex flex-column justify-content-center">
+    <!-- Row for book details -->
+    <div class="row justify-content-center align-items-center text-center">
+        <!-- Book Image -->
+        <div class="col-auto">
+            <img src="{% static book.pic_path %}" height="400" width="325" alt="Book Image">
+        </div>
+        <!-- General Info Section -->
+        <div class="col-auto fs-2 fw-medium">
+            <h2><strong>General Info</strong></h2>
+            <table class="table table-secondary table-striped table-hover">
+                <tbody>
+                    <tr>
+                        <th scope="row">Name</th>
+                        <td>{{ book.name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Price</th>
+                        <td>{{ book.price }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Published Date</th>
+                        <td>{{ book.publishdate }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Rating</th>
+                        <td>{{ book.overallrating }}/5</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-center align-items-center text-center mb-4">
+
+        <div class="col-auto mt-4">
+        <h2><strong>Comments</strong></h2>
+        <ul class="list-unstyled">
+            {% for comment in comments %}
+                <li class="m-0 p-0">
+                    <strong>{{ comment.user.username }}:</strong> {{ comment.content|linebreaks }}
+
+                    <small>Posted on {{ comment.created_at }}</small>
+                </li>
+            {% empty %}
+                <p>This comment section is empty</p>
+            {% endfor %}
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+</div>
 {% endblock content %}
