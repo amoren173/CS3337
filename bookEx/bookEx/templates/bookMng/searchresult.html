@@ -9,20 +9,23 @@
 
 {% block content %}
     <H1 style="text-align:center">{{ search }}</H1>
-<table class="table col p-3 table-bordered border-dark table-hover" border="2">
+    <div class="container mt-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
     {% for book in books %}
-        <tr>
-            <td class="text-center">
-                <a class="fs-5" href="book_detail/{{ book.id }}">{{ book.name }}</a>
-            </td>
-            <td class="fs-5 text-center">{{ book.username }}</td>
-            <td class="text-center">
-            <form action="{% url 'add_to_cart' book.id %}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="add-to-cart btn btn-primary">Add to Cart</button>
-            </form>
-           </td>
-        </tr>
+        <div class="col">
+                <div class="card h-100" style="width: 100%;">
+                    <img src="{% static book.pic_path %}" class="card-img-top" alt="{{ book.name }}" style="max-height: 300px;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title"><a href="book_detail/{{ book.id }}">{{ book.name }}</a></h5>
+                        <p><strong>Uploaded by: {{ book.username }}</strong></p>
+                        <form action="{% url 'add_to_cart' book.id %}" method="post" class="mt-auto">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart btn btn-primary w-100">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
     {% endfor %}
-</table>
+        </div>
+    </div>
 {% endblock content %}
