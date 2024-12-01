@@ -20,11 +20,11 @@
 </form>
 </div>
 <br>
-<table class="table col p-3 table-bordered border-dark table-hover" border="2">
+<table class="table col p-3 table-bordered border-dark table-hover" border="3">
     {% for book in books %}
         <tr>
             <td class="text-center">
-                <a class="fs-5" href="book_detail/{{ book.id }}">{{ book.name }}</a>
+                <a class="fs-5" href="book_detail/{{ book.id }}"><strong>{{ book.name }}</strong></a>
             </td>
             <td class="fs-5 text-center">{{ book.username }}</td>
 
