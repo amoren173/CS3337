@@ -83,6 +83,9 @@ def searchbook(request):
     if request.method == "POST" and request.POST.get('search') != '':
         search = request.POST.get('search')
         books = Book.objects.filter(name__contains=search)
+        for b in books:
+            b.pic_path = b.picture.url[14:]
+
         return render(request,
                   'bookMng/searchresult.html',
                   {
