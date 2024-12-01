@@ -155,12 +155,16 @@ def mybooks(request):
 def book_delete(request, book_id):
 
     book = Book.objects.get(id=book_id)
+    book.pic_path = book.picture.url[14:]
+    comments = book.comments.all()
     book.delete()
 
     return render(request,
                   'bookMng/book_delete.html',
                   {
                       'item_list': MainMenu.objects.all(),
+                      'book': book,
+                      'comments': comments,
                   })
 
 
@@ -228,13 +232,16 @@ def checkout(request):
         form = CheckoutForm()
 
     return render(request, 'bookMng/checkout.html', {
+        'item_list': MainMenu.objects.all(),
         'cart_items': cart_items,
         'total_price': total_price,
         'form': form,
     })
 
 def order_success(request):
-    return render(request, 'bookMng/order_success.html')
+    return render(request, 'bookMng/order_success.html', {
+        'item_list': MainMenu.objects.all(),
+    })
 
 class Register(CreateView):
     template_name = "registration/register.html"
