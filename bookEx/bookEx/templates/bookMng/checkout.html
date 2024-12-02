@@ -3,54 +3,86 @@
 
 {% block sidenav %}
    {% for item in item_list %}
-    <li class="nav-item py-2 ps-2 fs-5 text-center"><a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ item.link }}">{{ item.item }}</a></li>
+    <li class="nav-item py-2 ps-2 fs-5 text-center">
+        <a class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ item.link }}">{{ item.item }}</a>
+    </li>
    {% endfor %}
 {% endblock sidenav %}
 
 {% block content %}
-    <h1>Checkout</h1>
 
-    <form method="POST">
-        {% csrf_token %}
-        
-        <fieldset>
-            <legend>Billing Information</legend>
-            {{ form.full_name.label_tag }}<br>
-            {{ form.full_name }}<br><br>
+        <div class="row">
+                <h1 class="py-3 text-center">Checkout</h1>
+            </div>
+    <div class="container">
 
-            {{ form.address.label_tag }}<br>
-            {{ form.address }}<br><br>
+        <form method="POST">
+            {% csrf_token %}
 
-            {{ form.contact_number.label_tag }}<br>
-            {{ form.contact_number }}<br><br>
-        </fieldset>
+            <!-- Billing Information Section -->
+            <div class="row mb-4">
+                <fieldset class="col-12">
+                    <legend class="fs-4">Billing Information</legend>
+                    <div class="mb-3">
+                        {{ form.full_name.label_tag }}<br>
+                        {{ form.full_name }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.address.label_tag }}<br>
+                        {{ form.address }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.contact_number.label_tag }}<br>
+                        {{ form.contact_number }}
+                    </div>
+                </fieldset>
+            </div>
 
-        <fieldset>
-            <legend>Payment Options</legend>
-            {{ form.payment_method }}
-        </fieldset>
+            <!-- Payment Options Section -->
+            <div class="row mb-4">
+                <fieldset class="col-12">
+                    <legend class="fs-4">Payment Options</legend>
+                    <div class="mb-3">
+                        {{ form.payment_method }}
+                    </div>
+                </fieldset>
+            </div>
 
-        <fieldset>
-            <legend>Order Summary</legend>
-            <table>
-                <tr>
-                    <th>Book</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                </tr>
-                {% for item in cart_items %}
-                <tr>
-                    <td>{{ item.book.name }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>${{ item.book.price }}</td>
-                    <td>${{ item.total_price }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            <p class="total"><strong>Total:</strong> ${{ total_price }}</p>
-        </fieldset>
+            <!-- Order Summary Section -->
+            <div class="row mb-4">
+                <fieldset class="col-12">
+                    <legend class="fs-4">Order Summary</legend>
+                    <table class="table col p-3 table-bordered border-dark table-hover">
+                        <thead>
+                            <tr>
+                                <th>Book</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart_items %}
+                            <tr>
+                                <td>{{ item.book.name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>${{ item.book.price }}</td>
+                                <td>${{ item.total_price }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <p class="total"><strong>Total:</strong> ${{ total_price }}</p>
+                </fieldset>
+            </div>
 
-        <button type="submit" class="button">Place Order</button>
-    </form>
+            <!-- Submit Button -->
+            <div class="row">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">Place Order</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
 {% endblock content %}
