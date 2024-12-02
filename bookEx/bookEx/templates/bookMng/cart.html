@@ -25,12 +25,12 @@
             <tbody>
                 {% for item in cart_items %}
                 <tr>
-                    <td>{{ item.book.name }}</td>
+                    <td><strong>{{ item.book.name }}</strong></td>
                     <td>
                         <form action="{% url 'update_cart' item.id %}" method="POST">
                             {% csrf_token %}
                             <div class="container">
-                            <input class="form-control m-0 p-0" type="number" name="quantity" value="{{ item.quantity }}" min="1" style="width: 20%;">
+                            <input class="form-control m-0 p-0 text-center" type="number" name="quantity" value="{{ item.quantity }}" min="1" style="width: 20%;">
                             <button type="submit" class="btn btn-primary m-2">Update</button>
                             </div>
                         </form>
@@ -43,11 +43,15 @@
             </tbody>
         </table>
         </div>
-            <p class="total">Total: ${{ total }}</p>
-        <div class="container-fluid mb-4 w-25">
-            <a href="{% url 'displaybooks' %}" class="btn btn-primary m-2 btn-sm w-75">Continue Shopping</a>
-            <a href="{% url 'checkout' %}" class="btn btn-primary m-2 btn-sm w-75">Proceed to Checkout</a>
+        <p class="total">Total: ${{ total }}</p>
+        <div class="container-fluid w-25 mb-4 ms-5 pe-5 ps-0">
+            <div class="d-flex justify-content-start">
+
+                <a href="{% url 'displaybooks' %}" class="btn btn-primary m-2 btn-sm">Continue Shopping</a>
+                <a href="{% url 'checkout' %}" class="btn btn-primary m-2 btn-sm">Proceed to Checkout</a>
+            </div>
         </div>
+
         {% else %}
             <div class="container text-center py-5">
 
