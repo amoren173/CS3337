@@ -121,7 +121,7 @@ def ratebook(request, book_id):
             book.ratingscount += 1
             book.overallrating = book.ratings/book.ratingscount
             book.save()
-            return HttpResponseRedirect('/displaybooks')
+            return HttpResponseRedirect('/book_detail/'+str(book_id))
         else:
             return HttpResponseRedirect('/displaybooks')
     else:
