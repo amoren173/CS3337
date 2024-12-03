@@ -80,19 +80,31 @@ def displaybooks(request):
                   })
 
 def searchbook(request):
-    if request.method == "POST" and request.POST.get('search') != '':
+    if request.method == "POST" and request.POST.get('search').strip() != '':
         search = request.POST.get('search')
         books = Book.objects.filter(name__contains=search)
-        for b in books:
-            b.pic_path = b.picture.url[14:]
 
-        return render(request,
-                  'bookMng/searchresult.html',
-                  {
-                      'item_list': MainMenu.objects.all(),
-                      'books': books,
-                      'search': 'Search results for \'' + search + '\''
-                  })
+        if len(books) == 0:
+            return render(request,
+                          'bookMng/searchresult.html',
+                          {
+                              'item_list': MainMenu.objects.all(),
+                              'books': books,
+                              'search': 'Search results for \'' + search + '\'',
+                              'empty': True,
+                          })
+        else:
+            for b in books:
+                b.pic_path = b.picture.url[14:]
+
+            return render(request,
+                      'bookMng/searchresult.html',
+                      {
+                          'item_list': MainMenu.objects.all(),
+                          'books': books,
+                          'search': 'Search results for \'' + search + '\'',
+                          'empty': False,
+                      })
     else:
         return HttpResponseRedirect('/displaybooks')
 
