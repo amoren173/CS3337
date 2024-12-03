@@ -185,12 +185,15 @@ def book_delete(request, book_id):
 
 # Cart Views
 def add_to_cart(request, book_id):
-    book = Book.objects.get(id=book_id)
-    cart_item, created = CartItem.objects.get_or_create(book=book, user=request.user)
-    if not created:
-        cart_item.quantity += 1
-        cart_item.save()
-    return cart_view(request)
+    if request.user.is_authenticated:
+        book = Book.objects.get(id=book_id)
+        cart_item, created = CartItem.objects.get_or_create(book=book, user=request.user)
+        if not created:
+            cart_item.quantity += 1
+            cart_item.save()
+        return cart_view(request)
+    else:
+        return HttpResponseRedirect('/login?next=/')
 
 def cart_view(request):
     cart_items = CartItem.objects.filter(user=request.user)
