@@ -45,6 +45,26 @@
                     <div class="mb-3">
                         {{ form.payment_method }}
                     </div>
+                <div class="credit-card-info" id="credit-card-section">
+                        <div class="mb-3">
+                            <label for="card_number" class="form-label">Card Number</label>
+                            <input type="text" name="card_number" id="card_number" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-6">
+                                <label for="expiry_date" class="form-label">Expiry Date</label>
+                                <input type="text" name="expiry_date" id="expiry_date" class="form-control" placeholder="MM/YY" maxlength="5" required>
+                            </div>
+                            <div class="col-6">
+                                <label for="cvv" class="form-label">CVV</label>
+                                <input type="text" name="cvv" id="cvv" class="form-control" placeholder="123" maxlength="3" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cardholder_name" class="form-label">Cardholder Name</label>
+                            <input type="text" name="cardholder_name" id="cardholder_name" class="form-control" placeholder="Name on Card" required>
+                        </div>
+                    </div>
                 </fieldset>
             </div>
 
