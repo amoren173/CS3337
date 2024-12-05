@@ -41,31 +41,34 @@ def aboutus(request):
                   })
 
 def postbook(request):
-    submitted = False
-    if request.method == 'POST':
-        form = BookForm(request.POST, request.FILES)
-        if form.is_valid():
+    if request.user.is_authenticated:
+        submitted = False
+        if request.method == 'POST':
+            form = BookForm(request.POST, request.FILES)
+            if form.is_valid():
 
-            book = form.save(commit=False)
-            try:
-                book.username = request.user
-            except Exception:
-                pass
-            book.save()
+                book = form.save(commit=False)
+                try:
+                    book.username = request.user
+                except Exception:
+                    pass
+                book.save()
 
-            return HttpResponseRedirect('/postbook?submitted=True') #/postbook? <-- GET
+                return HttpResponseRedirect('/postbook?submitted=True') #/postbook? <-- GET
+        else:
+            form = BookForm()
+            if 'submitted' in request.GET:
+                submitted = True
+
+        return render(request,
+                      'bookMng/postbook.html',
+                      {
+                          'form': form,
+                          'item_list': MainMenu.objects.all(),
+                          'submitted': submitted
+                      })
     else:
-        form = BookForm()
-        if 'submitted' in request.GET:
-            submitted = True
-
-    return render(request,
-                  'bookMng/postbook.html',
-                  {
-                      'form': form,
-                      'item_list': MainMenu.objects.all(),
-                      'submitted': submitted
-                  })
+        return HttpResponseRedirect('/login?next=/')
 
 def displaybooks(request):
     books = Book.objects.all()
